@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Detalhes da Notícia</title>
-</head>
-<body>
-  <header class="header">
-    <ul class="header-links">
-        <li><a href="{% url 'home-page' %}">Home</a></li>
-    </ul>
-  </header>
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}
+  <title>Página de Detalhes da Notícia</title>
+{% endblock %}
+
+{% block content %}
   <div class="news-details">
-    <h1>{{ news.title }}</h1>
+    <h1 class="news-title">{{ news.title }}</h1>
     <p class="news-content">{{ news.content }}</p>
     <div>
         {% for category in news.categories.all %}
@@ -21,8 +15,7 @@
         {% endfor %}
     </div>
     <span class="news-author">Autor: {{ news.author }}</span>
-    <img src="{{ news.image.url }}" alt="{{ news.title }}" />
+    <img src="{% static news.image.url %}" alt="{{ news.title }}" />
     <p>Data de Criação: {{ news.created_at|date:"d/m/Y" }}</p>
   </div>
-</body>
-</html>
+{% endblock %}
