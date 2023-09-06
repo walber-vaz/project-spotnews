@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Página Inicial</title>
+{% endblock %}
+
+{% block stylesheets %} 
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+  <h1>Página Inicial</h1>
+
+  <div class="news-cards">
+      {% for news_item in news_list %}
+        <div class="news-card">
+            <img src="{% static news_item.image.url %}" alt="{{ news_item.title }}">
+            <h2 class="news-title">{{ news_item.title }}</h2>
+            <span class="news-date">{{ news_item.created_at|date:"d/m/Y" }}</span>
+        </div>
+      {% endfor %}
+  </div>
+{% endblock %}

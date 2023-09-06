@@ -3,11 +3,8 @@ from django.db import models
 
 
 def validate_not_single_word(value):
-    words = value.split()
-    if len(words) <= 1:
-        raise ValidationError(
-            "O título deve conter pelo menos 2 palavras.",
-        )
+    if value.count(" ") < 1:
+        raise ValidationError("O título deve conter pelo menos 2 palavras.")
 
 
 class News(models.Model):
