@@ -21,9 +21,11 @@ from django.urls import include, path
 from rest_framework import routers
 
 from news_rest.views.categories_view import CategoriesViewSet
+from news_rest.views.users_view import UsersViewSet
 
 router = routers.DefaultRouter()
 router.register(r"categories", CategoriesViewSet)
+router.register(r"users", UsersViewSet)
 
 urlpatterns = [
     path("", include("news.urls")),
