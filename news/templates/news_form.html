@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Formulário para Nova Notícia</title>
+{% endblock %}
+
+{% block content %}
+  <form method="post" action="{% url 'news-form' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="{{ form.title.id_for_label }}">Título</label>
+    <input type="text" name="title" id="title">
+    <br/>
+    <label for="{{ form.content.id_for_label }}">Conteúdo</label>
+    <textarea name="content" id="content"></textarea>
+    <br/>
+    <label for="{{ form.author.id_for_label }}">Autoria</label>
+    <select name="{{ form.author.name }}" id="{{ form.author.id_for_label }}">
+      {% for author in form.author.field.queryset %}
+          <option value="{{ author.pk }}">{{ author }}</option>
+      {% endfor %}
+    </select>
+    <br/>
+    <label for="{{ form.created_at.id_for_label }}">Criado em</label>
+    <input type="date" name="created_at" id="created_at">
+    <br/>
+    <label for="{{ form.image.id_for_label }}">URL da Imagem</label>
+    <input type="file" name="image" id="image">
+    <br/>
+    {% for category in categories %}
+      <label for="id_categories_{{ category.id }}">{{ category.name }}</label>
+      <input type="checkbox" name="categories" id="categories" value="{{ category.id }}">
+    {% endfor %}
+    <br/>
+    <button type="submit">Salvar</button>
+  </form>
+{% endblock %}
