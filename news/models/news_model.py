@@ -20,7 +20,7 @@ class News(models.Model):
     )
     created_at = models.DateField(null=False, blank=False)
     image = models.ImageField(upload_to="img/", null=True, blank=True)
-    categories = models.ManyToManyField("Categories")
+    categories = models.ManyToManyField("Categories", blank=True, null=True)
 
     def __str__(self):
         return self.title
